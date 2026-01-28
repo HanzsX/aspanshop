@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pesanan - Aspan-shop</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .order-page{
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    .order-grid{
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card{
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    .title-row{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .title-row h2{
+      margin: 0;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .muted{
+      opacity: .75;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    /* Countdown */
+    .countdown-wrap{
+      margin-top: 12px;
+      display:flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .cd-box{
+      width: 88px;
+      height: 88px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:center;
+      gap: 4px;
+    }
+
+    .cd-num{
+      font-size: 26px;
+      font-weight: 900;
+      color: #ff66c4;
+      line-height: 1;
+    }
+
+    .cd-label{
+      font-size: 12px;
+      opacity: .75;
+    }
+
+    .qr-box{
+      margin-top: 14px;
+      background: rgba(255,255,255,.95);
+      border-radius: 14px;
+      padding: 16px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      min-height: 280px;
+    }
+
+    .qr-box img{
+      width: 100%;
+      max-width: 280px;
+      height: auto;
+      display:block;
+    }
+
+    .btn{
+      width: 100%;
+      margin-top: 12px;
+      border: 0;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: #ff66c4;
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* Right side */
+    .top-info{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 14px;
+    }
+
+    .info-col{
+      display:flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .info-col span{
+      font-size: 12px;
+      opacity: .70;
+    }
+
+    .info-col b{
+      font-size: 13px;
+      font-weight: 800;
+      opacity: .95;
+    }
+
+    .game-card{
+      padding: 0;
+      overflow: visible;
+    }
+
+    .game-head{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+    }
+
+    .game-thumb{
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .game-head b{
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .detail-body{
+      padding-bottom: 20px;
+    }
+
+    .detail-body h3{
+      margin: 0 0 12px;
+      font-size: 14px;
+      font-weight: 900;
+      opacity: .9;
+    }
+
+    .row{
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 8px 0;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .row:last-child{
+      border-bottom: 0;
+    }
+
+    .row span{
+      opacity: .75;
+    }
+
+    .row b{
+      font-weight: 900;
+    }
+
+    .total-bar{
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .total-bar b{
+      font-size: 16px;
+      font-weight: 900;
+      color: #ff66c4;
+    }
+
+    .copy-btn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .howto{
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .howto-title{
+      font-weight: 900;
+      margin-bottom: 10px;
+      font-size: 13px;
+      opacity: .9;
+    }
+
+    .howto-select{
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: #fff;
+      border-radius: 14px;
+      padding: 12px 14px;
+      outline: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .order-page,
+    .order-grid,
+    .card{
+      height: auto !important;
+      max-height: none !important;
+      overflow: visible !important;
+    }
+      .detail-body .row{
+       padding: 10px 0;
+    }
+    
+    .container { 
+      overflow: hidden; 
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .order-grid{
+        grid-template-columns: 1fr;
+      }
+      .top-info{
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <button class="burger" id="openSidebar" aria-label="Menu">
+      <span></span>
+    </button>
+
+    <div class="brand">
+      <img class="logo-img" src="img/logo.png" alt="Aspan-shop">
+      <span class="brand-text">aspan<span class="brand-accent">shop</span></span>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="brand sidebar-brand">
+        <img class="logo-img" src="img/logo.png" alt="Aspan-shop">
+        <span class="brand-text">aspan<span class="brand-accent">shop</span></span>
+      </div>
+      <button class="close" id="closeSidebar" aria-label="Tutup">✕</button>
+    </div>
+
+    <nav class="menu">
+      <a href="index.html" class="menu-item">
+        <span class="menu-icon">🏠</span>
+        <span>Beranda</span>
+      </a>
+      <a href="index.html#panelGame" class="menu-item">
+        <span class="menu-icon">🎮</span>
+        <span>Semua Game</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="container order-page">
+
+    <section class="order-grid">
+
+      <div class="card">
+        <div class="title-row">
+          <h2>Belum Bayar</h2>
+        </div>
+
+        <div class="muted">
+          Selesaikan Pembayaran Sebelum Waktu Habis
+        </div>
+
+        <div class="countdown-wrap">
+          <div class="cd-box">
+            <div class="cd-num" id="cdHour">00</div>
+            <div class="cd-label">Jam</div>
+          </div>
+          <div class="cd-box">
+            <div class="cd-num" id="cdMin">00</div>
+            <div class="cd-label">Menit</div>
+          </div>
+          <div class="cd-box">
+            <div class="cd-num" id="cdSec">00</div>
+            <div class="cd-label">Detik</div>
+          </div>
+        </div>
+
+        <div class="muted" style="text-align:center; margin-top:10px;">
+          Agar Pesanan Kamu Tidak Expired
+        </div>
+
+        <div class="qr-box">
+          <img id="qrisImage" src="" alt="QRIS">
+        </div>
+
+        <button class="btn" id="downloadQRBtn">Unduh kode QR</button>
+      </div>
+
+      <div>
+
+        <div class="top-info">
+          <div class="info-col">
+            <span>Tanggal Pembelian</span>
+            <b id="dateText">-</b>
+          </div>
+          <div class="info-col">
+            <span>Nomor Pesanan</span>
+            <b id="orderText">-</b>
+          </div>
+          <div class="info-col">
+            <span>Metode Pembayaran</span>
+            <b>QRIS Untuk Semua Pembayaran</b>
+          </div>
+          <div class="info-col">
+            <span>Status Pesanan</span>
+            <b>Belum Bayar</b>
+          </div>
+        </div>
+
+        <div class="card game-card">
+          <div class="game-head">
+            <img class="game-thumb" id="gameThumb" src="img/games/mlbb.jpg" alt="Game">
+            <b id="gameName">Game</b>
+          </div>
+
+          <div class="detail-body">
+            <h3>Detail</h3>
+
+            <div class="row">
+              <span>Item</span>
+              <b id="itemText">-</b>
+            </div>
+
+            <div class="row">
+              <span>ID User</span>
+              <b id="userText">-</b>
+            </div>
+
+            <div class="row">
+              <span>Harga</span>
+              <b id="priceText">Rp -</b>
+            </div>
+
+            <div class="row">
+              <span>Fee</span>
+              <b id="feeText">Rp 0</b>
+            </div>
+
+            <div class="row">
+              <span>Kode Unik</span>
+              <b id="uniqueText">-</b>
+            </div>
+
+            <div class="total-bar">
+              <span>Total Pembayaran</span>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <b id="totalText">Rp -</b>
+                <button class="copy-btn" id="copyTotalBtn">⧉</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="howto">
+          <div class="howto-title">
+            Cara Melakukan Pembayaran Dengan Upload Gambar QRIS Di Semua E-wallet
+          </div>
+          <select class="howto-select">
+            <option>Melalui Semua E-wallet</option>
+          </select>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+<div class="pay-success-overlay" id="paySuccess" style="display:none;">
+  <div class="pay-success-box">
+    <div class="checkmark-circle">
+      <svg class="checkmark" viewBox="0 0 52 52">
+        <circle class="checkmark-circle-bg" cx="26" cy="26" r="25" fill="none"/>
+        <path class="checkmark-check" fill="none" d="M14 27l7 7 17-17"/>
+      </svg>
+    </div>
+
+    <h3>Pembayaran Berhasil</h3>
+    <p>Anda akan diarahkan ke Telegram...</p>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+<script>
+  const BACKEND_URL =
+    "https://qris-generator-production-d977.up.railway.app";
+  const TELEGRAM_URL = "https://t.me/aspanoffc";
+
+  let redirected = false;
+
+  function rupiah(n) {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0
+    }).format(n);
+  }
+
+  function getParams() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      order_id: p.get("order_id"),
+      amount: parseInt(p.get("amount") || "0"),
+      game: p.get("game") || "Game",
+      item: p.get("item") || "-",
+      user: p.get("user") || "-"
+    };
+  }
+
+  function setCountdown(expired_at) {
+    if (!expired_at) return;
+    const target = new Date(expired_at).getTime();
+
+    const timer = setInterval(() => {
+      const now = Date.now();
+      let diff = target - now;
+
+      if (diff <= 0) {
+        diff = 0;
+        clearInterval(timer);
+      }
+
+      document.getElementById("cdHour").innerText =
+        String(Math.floor(diff / 3600000)).padStart(2, "0");
+      document.getElementById("cdMin").innerText =
+        String(Math.floor((diff % 3600000) / 60000)).padStart(2, "0");
+      document.getElementById("cdSec").innerText =
+        String(Math.floor((diff % 60000) / 1000)).padStart(2, "0");
+    }, 1000);
+  }
+
+  async function createInvoice(order_id, amount) {
+    const res = await fetch(`${BACKEND_URL}/qris`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ order_id, amount })
+    });
+
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+
+    return {
+      qrString: data?.payment?.payment_number,
+      expired: data?.payment?.expired_at
+    };
+  }
+
+  async function checkPaymentStatus(order_id) {
+    if (redirected) return;
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/status/${order_id}`);
+      const data = await res.json();
+
+      if (data.status === "success") {
+        redirected = true;
+
+        document.getElementById("paySuccess").style.display = "flex";
+
+        setTimeout(() => {
+          window.location.href = TELEGRAM_URL;
+        }, 2000);
+      }
+    } catch (err) {
+      console.log("Status check error:", err);
+    }
+  }
+
+  async function main() {
+    const { order_id, amount, game, item, user } = getParams();
+    if (!order_id || !amount) {
+      alert("Order ID / amount tidak ditemukan!");
+      return;
+    }
+
+    // ====== INFO ORDER ======
+    document.getElementById("dateText").innerText =
+      new Date().toLocaleDateString("id-ID");
+
+    document.getElementById("orderText").innerText = order_id;
+    document.getElementById("gameName").innerText = game;
+    document.getElementById("itemText").innerText = item;
+    document.getElementById("userText").innerText = user;
+    document.getElementById("priceText").innerText = rupiah(amount);
+    document.getElementById("totalText").innerText = rupiah(amount);
+    document.getElementById("uniqueText").innerText =
+      Math.floor(Math.random() * 9000 + 1000);
+
+    // ====== QRIS (CEK LOCALSTORAGE) ======
+    const savedQR = localStorage.getItem(`qris_${order_id}`);
+    const savedExpired = localStorage.getItem(`qris_exp_${order_id}`);
+
+    if (savedQR) {
+      document.getElementById("qrisImage").src = savedQR;
+      if (savedExpired) setCountdown(savedExpired);
+    } else {
+      try {
+        const { qrString, expired } = await createInvoice(order_id, amount);
+        const qrUrl =
+          `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(qrString)}`;
+
+        localStorage.setItem(`qris_${order_id}`, qrUrl);
+        localStorage.setItem(`qris_exp_${order_id}`, expired);
+
+        document.getElementById("qrisImage").src = qrUrl;
+        setCountdown(expired);
+      } catch (err) {
+        alert("Gagal membuat QRIS: " + err.message);
+        return;
+      }
+    }
+
+    document.getElementById("downloadQRBtn").onclick = () => {
+      const a = document.createElement("a");
+      a.href = document.getElementById("qrisImage").src;
+      a.download = `${order_id}.png`;
+      a.click();
+    };
+
+    document.getElementById("copyTotalBtn").onclick = async () => {
+      await navigator.clipboard.writeText(String(amount));
+      alert("Total pembayaran disalin!");
+    };
+
+    // ====== POLLING STATUS ======
+    setInterval(() => {
+      checkPaymentStatus(order_id);
+    }, 5000);
+  }
+
+  main();
+  fetch("api/get-products.php")
+  .then(res => res.json())
+  .then(products => {
+    products.forEach(p => {
+      const card = document.querySelector(`[data-code="${p.code}"]`);
+      if (!card) return;
+
+      const stockBadge = card.querySelector(".stock-badge");
+
+      if (p.stock > 0) {
+        stockBadge.innerText = `Stok: ${p.stock}`;
+        stockBadge.classList.remove("habis");
+      } else {
+        stockBadge.innerText = "Habis";
+        stockBadge.classList.add("habis");
+      }
+    });
+  });
+
+</script>
+
+
+</body>
+</html>
