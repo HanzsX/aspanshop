@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Produk - Aspan-shop</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="product.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> 
+</head>
+
+<body>
+
+  <header class="topbar">
+    <button class="burger" id="openSidebar" aria-label="Menu">
+      <span></span>
+    </button>
+
+    <div class="brand">
+      <img class="logo-img" src="img/logo.png" alt="Aspan-shop">
+        <a href="index.html" style="text-decoration: none; color: inherit;">
+            <span class="brand-text">
+                aspan<span class="brand-accent">shop</span>
+            </span>
+        </a>
+    </div>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="brand sidebar-brand">
+        <img class="logo-img" src="img/logo.png" alt="Aspan-shop">
+        <span class="brand-text">aspan<span class="brand-accent">shop</span></span>
+      </div>
+
+      <button class="close" id="closeSidebar" aria-label="Tutup">✕</button>
+    </div>
+
+    <nav class="menu">
+      <a href="index.html" class="menu-item">
+        <span class="menu-icon">🏠</span>
+        <span>Beranda</span>
+      </a>
+      <a href="index.html#panelGame" class="menu-item">
+        <span class="menu-icon">🎮</span>
+        <span>Semua Game</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="container product-page">
+    <section class="product-layout">
+
+      <aside class="info-card">
+        <div class="info-top">
+          <img class="game-thumb" id="gameThumb" src="" alt="Game">
+          <div class="info-title">
+            <span class="publisher" id="publisher"></span>
+            <h2 id="gameName"></h2>
+          </div>
+        </div>
+
+        <div class="info-icons">
+          <div class="info-item">🛡️ Jaminan Layanan</div>
+          <div class="info-item">🔒 Pembayaran Aman</div>
+          <div class="info-item">💬 Layanan Pelanggan 24/7</div>
+          <div class="info-item">⚡ Pengiriman Instant</div>
+        </div>
+
+        <hr class="info-line">
+
+        <p class="info-desc" id="gameDesc"></p>
+        <p class="info-desc" id="gameNote"></p>
+      </aside>
+
+      <section class="form-area">
+
+        <div class="panel">
+          <div class="panel-head">
+            <span class="step">1</span>
+            <h3>Informasi Pelanggan</h3>
+            <span class="help">?</span>
+          </div>
+
+          <div class="panel-body">
+            <label class="label">Masukkan Informasi Anda</label>
+            <div class="row-2">
+              <input class="input" id="userIdInput" type="text" placeholder="Username" />
+              <input class="input" id="serverIdInput" type="text" placeholder="Gmail" />
+
+            </div>
+
+            <label class="label">Nomor WhatsApp</label>
+             <input class="input" id="waInput" type="text" placeholder="08xxxxxxxxxx" />
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <span class="step">2</span>
+            <h3>Pilih Nominal Top Up</h3>
+          </div>
+
+          <div class="nominal-grid" id="nominalGrid">
+          </div>
+        </div>
+
+<div class="panel">
+  <div class="panel-head">
+    <span class="step">3</span>
+    <h3>Pilih Pembayaran</h3>
+  </div>
+
+  <div class="panel-body pay-body">
+
+    <div class="pay-item">
+      <button class="pay-head" type="button" data-pay="qris">
+        <span class="pay-title">QRIS</span>
+        <span class="pay-right">
+          <img class="pay-logo" src="img/qris.jpeg" alt="QRIS">
+          <span class="pay-arrow">▾</span>
+        </span>
+      </button>
+
+      <div class="pay-content" id="pay-qris">
+        <div class="pay-box">
+          <img class="pay-preview" id="qrisPreview" src="img/qris.jpeg" alt="QRIS Preview">
+          <div class="pay-info">
+            <div class="pay-price" id="qrisPrice">Rp -</div>
+            <div class="pay-desc" id="qrisDesc">QRIS Untuk Semua Pembayaran</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-item">
+      <button class="pay-head" type="button" data-pay="ewallet">
+        <span class="pay-title">E - Wallet</span>
+        <span class="pay-right">
+          <img class="pay-logo" src="img/shopeepay.png" alt="ShopeePay">
+          <span class="pay-arrow">▾</span>
+        </span>
+      </button>
+
+      <div class="pay-content" id="pay-ewallet">
+        <div class="pay-box simple">
+          <div class="pay-desc">Metode E-Wallet (contoh: ShopeePay, OVO, Dana, GoPay)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-item">
+      <button class="pay-head" type="button" data-pay="cstore">
+        <span class="pay-title">Convenience Store</span>
+        <span class="pay-right">
+          <img class="pay-logo" src="img/alfamart.png" alt="Alfamart">
+          <img class="pay-logo" src="img/indomaret.png" alt="Indomaret">
+          <span class="pay-arrow">▾</span>
+        </span>
+      </button>
+
+      <div class="pay-content" id="pay-cstore">
+        <div class="pay-box simple">
+          <div class="pay-desc">Pembayaran via Alfamart / Indomaret</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-item">
+      <button class="pay-head" type="button" data-pay="va">
+        <span class="pay-title">Virtual Account</span>
+        <span class="pay-right">
+          <img class="pay-logo" src="img/bni.png" alt="BNI">
+          <img class="pay-logo" src="img/bri.png" alt="BRI">
+          <img class="pay-logo" src="img/mandiri.png" alt="Mandiri">
+          <span class="pay-arrow">▾</span>
+        </span>
+      </button>
+
+      <div class="pay-content" id="pay-va">
+        <div class="pay-box simple">
+          <div class="pay-desc">Transfer via Virtual Account Bank</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-note">Setelah Memilih Pembayaran, Konfirmasi Muncul.</div>
+
+    <button class="confirm-btn" id="confirmBuyBtn" type="button" disabled>
+      Konfirmasi Pembelian →
+    </button>
+
+  </div>
+</div>
+
+
+      </section>
+    </section>
+  </main>
+  <div class="modal-overlay" id="orderModal" style="display:none;">
+  <div class="modal-box">
+    <h3>Detail Pesanan</h3>
+    <p style="opacity:.8; margin-top:6px;">
+      Jika Data Pesanan Kamu Sudah Benar Klik Beli Sekarang
+    </p>
+
+    <div class="modal-section">
+      <div class="modal-title">— Data Player</div>
+      <div class="modal-row">
+        <span>USER ID</span>
+        <b id="modalUserId">-</b>
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <div class="modal-title">— Ringkasan Pembelian</div>
+      <div class="modal-row">
+        <span>Nomor Handphone</span>
+        <b id="modalWa">-</b>
+      </div>
+      <div class="modal-row">
+        <span>Item</span>
+        <b id="modalItem">-</b>
+      </div>
+      <div class="modal-row">
+        <span>Harga</span>
+        <b id="modalPrice">-</b>
+      </div>
+      <div class="modal-row">
+        <span>Sistem Pembayaran</span>
+        <b id="modalPay">QRIS Untuk Semua Pembayaran</b>
+      </div>
+      <div class="modal-row">
+        <span>Total Pembayaran</span>
+        <b id="modalTotal">-</b>
+      </div>
+    </div>
+
+ <div class="modal-actions">
+  <button class="modal-cancel" id="cancelOrderBtn" type="button">Cancel</button>
+  <button class="modal-buy" id="payNowBtn" type="button">Beli Sekarang →</button>
+</div>
+
+<div class="checkout-bar" id="checkoutBar" style="display:none;">
+  <div class="checkout-left">
+    <div class="checkout-item" id="checkoutItem">-</div>
+    <div class="checkout-price" id="checkoutPrice">Rp -</div>
+  </div>
+
+  <button class="confirm-btn" id="confirmBuyBtn" type="button">
+    Konfirmasi Pembelian →
+  </button>
+</div>
+
+    </div>
+  </div>
+</div>
+
+  <footer class="footer">
+    <div class="footer-wrap">
+
+      <div class="footer-grid">
+        <div class="footer-left">
+          <div class="footer-brand">
+            <img class="logo-img" src="img/logo.png" alt="Aspan-shop">
+            <span class="brand-text">aspan<span class="brand-accent">shop</span></span>
+          </div>
+
+          <p class="footer-desc">
+            Top-Up Game Favorit Kamu Di Aspan-shop Agar Main Game Semakin Seru.
+            Pengiriman Cepat Dan Berbagai Metode Pembayaran Yang Lengkap.
+          </p>
+        </div>
+
+        <div class="footer-right">
+          <div class="footer-col">
+            <h4>PETA SITUS</h4>
+            <a href="index.html">Beranda</a>
+            <a href="index.html#panelGame">Semua Game</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>TOP UP LAINNYA</h4>
+            <a href="product.html?game=yt">Youtube Premium</a>
+            <a href="product.html?game=sp">Spotify Premium</a>
+            <a href="product.html?game=am">Alight Motion Pro</a>
+            <a href="product.html?game=cc">Capcut Premium</a>
+          </div>
+
+          <div class="footer-col">
+            <h4>IKUTI KAMI</h4>
+            <div class="footer-social">
+              <a class="social-btn" href="https://api.whatsapp.com/send/?phone=6281529484830&text&type=phone_number&app_absent=0"><i class="fab fa-whatsapp"></i></a>
+              <a class="social-btn" href="https://www.instagram.com/pakwoo_ki?igsh=ejhqeGhxOWYwbnVl"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <h4 class="help-title">BANTUAN PELANGGAN</h4>
+            <a class="help-btn" href="#">
+              Hubungi Kami <span class="lock">🔒</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-line"></div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Aspan-shop. Semua Hak Cipta</div>
+        <a href="#" class="footer-link">Syarat & Ketentuan Pengguna</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="product.js"></script>
+
+</body>
+</html>
